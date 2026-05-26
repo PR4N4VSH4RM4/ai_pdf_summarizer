@@ -1,21 +1,25 @@
 function UploadBox() {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-slate-800 p-10 rounded-2xl shadow-xl w-[500px]">
+<div className="flex flex-col items-center justify-center min-h-screen pt-10 w-full px-6 bg-white">
+        <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-5xl border-2 border-dashed border-slate-300 cursor-pointer hover:border-indigo-500 transition">
           
-          <h1 className="text-3xl font-bold mb-6 text-center">
-            Drop a PDf 
+        <h1 className="text-3xl font-bold mb-6 text-center !text-black">
+            Drag and Drop your Pdf here
           </h1>
-  
-          <label className="border-2 border-dashed border-slate-500 rounded-xl p-10 flex flex-col items-center justify-center cursor-pointer hover:border-indigo-500 transition">
+          <p className="text-sm text-gray-400 mt-4">
+  or browse from your computer- up to 50MB per file 
+</p>
             
-            <p className="text-lg mb-2">
-              Upload PDF
-            </p>
+          
+          <label className="flex flex-col items-center justify-center cursor-pointer">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg mt-6 transition">
+                Choose File
+            </button>
+            <p className="text-sm text-gray-400 mt-4">
+  PDF files only
+</p>
+            
 
-            <p className="text-sm text-slate-400">
-              Drag & Drop or Click
-            </p>
   
             <input
               type="file"
