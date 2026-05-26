@@ -4,7 +4,7 @@ function UploadBox() {
         <div className="bg-slate-800 p-10 rounded-2xl shadow-xl w-[500px]">
           
           <h1 className="text-3xl font-bold mb-6 text-center">
-            Drop a PDf here
+            Drop a PDf 
           </h1>
   
           <label className="border-2 border-dashed border-slate-500 rounded-xl p-10 flex flex-col items-center justify-center cursor-pointer hover:border-indigo-500 transition">
