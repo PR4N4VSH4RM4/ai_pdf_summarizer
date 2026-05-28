@@ -1,47 +1,35 @@
-import Sidebar from "./components/Toolbar";
-import Navbar from "./components/navbar";
+import { useState } from "react";
+
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 import UploadBox from "./components/UploadBox";
-
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
-
-function Dashboard() {
-  return (
-    <h1 className="text-3xl font-bold">
-      Dashboard
-    </h1>
-  );
-}
+import PdfViewer from "./components/PdfViewer";
 
 function App() {
+
+  const [activePage, setActivePage] = useState("upload");
+
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-[#f8fafc] overflow-hidden">
 
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar
+  activePage={activePage}
+  setActivePage={setActivePage}
+/>
 
       {/* Main */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex flex-col flex-1">
 
-        <Navbar />
+        {/* Navbar */}
+        <Navbar activePage={activePage} />
 
-        <main className="p-8">
+        {/* Page Content */}
+        <main className="flex-1 p-6 overflow-y-auto">
 
-          <Routes>
+          {activePage === "upload" && <UploadBox />}
 
-            <Route
-              path="/"
-              element={<Dashboard />}
-            />
-
-            <Route
-              path="/upload"
-              element={<UploadBox />}
-            />
-
-          </Routes>
+          {activePage === "viewer" && <PdfViewer />}
 
         </main>
 
