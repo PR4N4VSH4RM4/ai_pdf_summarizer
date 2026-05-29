@@ -1,4 +1,4 @@
-function PdfViewer() {
+function PdfViewer({selectedFile}) {
     return (
       <div className="w-full h-full flex flex-col gap-6">
   
@@ -32,23 +32,28 @@ function PdfViewer() {
   
         {/* PDF Area */}
         <div className="flex-1 bg-white rounded-2xl border border-gray-200 overflow-hidden flex items-center justify-center">
-  
-          {/* PDF Render Space */}
-          <div className="w-full h-full flex items-center justify-center bg-gray-50">
-  
-            <div className="text-center">
-  
-              <h2 className="text-2xl font-semibold text-gray-700 mb-3">
-                No PDF Selected
-              </h2>
-  
-              <p className="text-gray-500">
-                Uploaded PDF will appear here
-              </p>
-  
-            </div>
-  
-          </div>
+        {
+  selectedFile ? (
+    <iframe
+    src={URL.createObjectURL(selectedFile)}
+    title="PDF Viewer"
+    className="w-full h-full"
+  />
+  ) : (
+    <div className="text-center">
+
+      <h2 className="text-2xl font-semibold text-gray-700 mb-3">
+        No PDF Selected
+      </h2>
+
+      <p className="text-gray-500">
+        Uploaded PDF will appear here
+      </p>
+
+    </div>
+  )
+}
+          
   
         </div>
   
