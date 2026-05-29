@@ -8,6 +8,7 @@ import PdfViewer from "./components/PdfViewer";
 function App() {
 
   const [activePage, setActivePage] = useState("upload");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   return (
     <div className="flex h-screen bg-[#f8fafc] overflow-hidden">
@@ -27,9 +28,9 @@ function App() {
         {/* Page Content */}
         <main className="flex-1 p-6 overflow-y-auto">
 
-          {activePage === "upload" && <UploadBox />}
+          {activePage === "upload" && <UploadBox setSelectedFile ={setSelectedFile}/>}
 
-          {activePage === "viewer" && <PdfViewer />}
+          {activePage === "viewer" && <PdfViewer selectedFile = {selectedFile}/>}
 
         </main>
 
