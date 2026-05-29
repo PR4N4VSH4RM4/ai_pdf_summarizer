@@ -26,9 +26,9 @@ function App() {
         <Navbar activePage={activePage} />
 
         {/* Page Content */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className="flex-1 p-3 md:p-6 overflow-y-auto">
 
-          {activePage === "upload" && <UploadBox setSelectedFile ={setSelectedFile}/>}
+          {activePage === "upload" && <UploadBox setSelectedFile ={setSelectedFile} setActivePage={setActivePage}/>}
 
           {activePage === "viewer" && <PdfViewer selectedFile = {selectedFile}/>}
 

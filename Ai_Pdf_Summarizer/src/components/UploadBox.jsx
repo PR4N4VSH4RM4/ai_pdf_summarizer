@@ -1,10 +1,10 @@
 import { Upload } from "lucide-react";
 
-function UploadBox({setSelectedFile}) {
+function UploadBox({setSelectedFile, setActivePage}) {
   return (
     <div className="w-full">
 
-      <div className="bg-white border border-dashed border-gray-300 rounded-2xl min-h-[340px] flex flex-col items-center justify-center">
+      <div className="bg-white border border-dashed border-gray-300 py-16 px-5 md:py-28 md:px-10 rounded-2xl min-h-[340px] flex flex-col items-center justify-center">
 
         {/* Upload Icon */}
         <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-6">
@@ -12,7 +12,7 @@ function UploadBox({setSelectedFile}) {
         </div>
 
         {/* Heading */}
-        <h1 className="text-3xl font-semibold text-gray-800 mb-3">
+        <h1 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-3">
           Drag and drop your PDF here
         </h1>
 
@@ -24,9 +24,10 @@ function UploadBox({setSelectedFile}) {
         {/* Button */}
         <label className="cursor-pointer">
 
-          <div className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition">
-            Choose File
+        <div className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition">
+          Choose File
           </div>
+          
 
           <input
             type="file"
@@ -35,6 +36,13 @@ function UploadBox({setSelectedFile}) {
             onChange={(e) => {
               const file = e.target.files[0];
               setSelectedFile(file);
+              if(file){
+                setSelectedFile(file);
+
+                setTimeout(() => {
+                  setActivePage("viewer");
+                }, 100);
+              }
             }}
           />
 

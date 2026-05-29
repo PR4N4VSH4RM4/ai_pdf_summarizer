@@ -16,7 +16,7 @@ function Sidebar({ activePage, setActivePage }) {
     "text-gray-500 hover:bg-gray-100";
 
   return (
-    <aside className="w-[250px] bg-white border-r border-gray-200 flex flex-col">
+    <aside className="hidden md:flex md:w-[250px] bg-white border-r border-gray-200 flex flex-col">
 
       {/* Logo */}
       <div className="h-16 flex items-center px-5 border-b border-gray-200">
