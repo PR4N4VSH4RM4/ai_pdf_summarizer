@@ -80,10 +80,12 @@ function PdfViewer({ selectedFile }) {
                       className="mb-6 flex justify-center"
                     >
 
-                      <Page
-                        pageNumber={index + 1}
-                        scale={scale}
-                      />
+                    <Page
+                      pageNumber={index + 1}
+                      // width={isMobile ? 320 : 800}
+                      width={Math.min(window.innerWidth - 80, 800)}
+                      scale={scale}
+                    />
 
                     </div>
                   )
