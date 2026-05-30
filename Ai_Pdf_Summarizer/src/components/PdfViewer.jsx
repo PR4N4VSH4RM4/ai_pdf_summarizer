@@ -4,11 +4,10 @@ import { Document, Page, pdfjs } from "react-pdf";
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
+// import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc =
+  `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 function PdfViewer({ selectedFile }) {
 
@@ -37,9 +36,16 @@ function PdfViewer({ selectedFile }) {
           selectedFile ? (
 
             <Document
-              file={URL.createObjectURL(selectedFile)}
-              onLoadSuccess={onDocumentLoadSuccess}
-            >
+
+  file={URL.createObjectURL(selectedFile)}
+  onLoadSuccess={onDocumentLoadSuccess}
+  onLoadError={(error) => {
+    console.error("PDF LOAD ERROR:", error);
+  }}
+  onSourceError={(error) => {
+    console.error("PDF SOURCE ERROR:", error);
+  }}
+>
 
               
                {
