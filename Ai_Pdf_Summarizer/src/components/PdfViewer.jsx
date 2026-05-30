@@ -12,6 +12,7 @@ pdfjs.GlobalWorkerOptions.workerSrc =
 function PdfViewer({ selectedFile }) {
 
   const [numPages, setNumPages] = useState();
+  const [scale, setScale] = useState(1);
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -20,14 +21,35 @@ function PdfViewer({ selectedFile }) {
   return (
     <div className="w-full h-full flex flex-col gap-6">
 
-      {/* Header */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-5">
+<div className="bg-white rounded-2xl border border-gray-200 px-6 py-4 shadow-sm">
 
-        <h1 className="text-2xl font-semibold text-gray-800">
-          PDF Viewer
-        </h1>
+  <div className="flex items-center gap-4">
 
-      </div>
+    <h1 className="text-2xl font-semibold text-gray-800">
+      PDF Viewer
+    </h1>
+    <div className="h-6 w-px bg-gray-300"></div>
+    <button
+  onClick={() => setScale((prev) => Math.max(0.5, prev - 0.2))}
+  className="w-10 h-10 rounded-xl bg-gray-100 border border-gray-300 shadow-sm hover:bg-gray-200 flex items-center justify-center text-lg font-bold text-gray-700"
+>
+  −
+</button>
+
+<span className="px-3 py-2 text-sm font-medium text-gray-600">
+  {Math.round(scale * 100)}%
+</span>
+
+<button
+  onClick={() => setScale((prev) => Math.min(3, prev + 0.2))}
+  className="w-10 h-10 rounded-xl bg-gray-100 border border-gray-300 shadow-sm hover:bg-gray-200 flex items-center justify-center text-lg font-bold text-gray-700"
+>
+  +
+</button>
+
+  </div>
+
+</div>
 
       {/* Viewer */}
       <div className="flex-1 bg-white rounded-2xl border border-gray-200 overflow-auto p-5">
@@ -60,7 +82,7 @@ function PdfViewer({ selectedFile }) {
 
                       <Page
                         pageNumber={index + 1}
-                        width={800}
+                        scale={scale}
                       />
 
                     </div>
