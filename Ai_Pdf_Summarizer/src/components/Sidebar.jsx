@@ -4,10 +4,12 @@ import {
   Eye,
 } from "lucide-react";
 
-function Sidebar({ activePage, setActivePage }) {
+function Sidebar({ activePage, setActivePage, sidebarOpen  }) {
 
   const menuClass =
-    "flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] transition";
+  `flex items-center px-4 py-3 rounded-xl text-[15px] transition ${
+    sidebarOpen ? "gap-3" : "justify-center"
+  }`;
 
   const activeClass =
     "bg-blue-50 text-blue-600 font-medium";
@@ -16,19 +18,23 @@ function Sidebar({ activePage, setActivePage }) {
     "text-gray-500 hover:bg-gray-100";
 
   return (
-    <aside className="hidden md:flex md:w-[250px] bg-white border-r border-gray-200 flex flex-col">
-
+    <aside
+  className={`hidden md:flex bg-white border-r border-gray-200 flex-col transition-all duration-300 overflow-hidden ${
+    sidebarOpen ? "w-[250px]" : "w-[80px]"
+  }`}
+>
       {/* Logo */}
       <div className="h-16 flex items-center px-5 border-b border-gray-200">
 
         <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-semibold">
-          P
+          
         </div>
 
-        <h1 className="ml-3 text-[22px] font-semibold text-gray-800">
-          PDF Analyzer
-        </h1>
-
+        {sidebarOpen && (
+  <h1 className="ml-3 text-[22px] font-semibold text-gray-800">
+    PDF Analyzer
+  </h1>
+)}
       </div>
 
       {/* Menu */}
@@ -44,7 +50,7 @@ function Sidebar({ activePage, setActivePage }) {
           onClick={() => setActivePage("dashboard")}
         >
           <LayoutDashboard size={18} />
-          Dashboard
+          {sidebarOpen && "Dashboard"}
         </button>
 
         {/* Upload */}
@@ -57,7 +63,7 @@ function Sidebar({ activePage, setActivePage }) {
           onClick={() => setActivePage("upload")}
         >
           <Upload size={18} />
-          Upload PDF
+          {sidebarOpen && "Upload PDF"}
         </button>
 
         {/* Viewer */}
@@ -69,8 +75,8 @@ function Sidebar({ activePage, setActivePage }) {
           }`}
           onClick={() => setActivePage("viewer")}
         >
-          <Eye size={18} />
-          PDF Viewer
+        <Eye size={18} />
+        {sidebarOpen && <span>PDF Viewer</span>}
         </button>
 
       </div>

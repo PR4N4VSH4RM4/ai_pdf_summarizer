@@ -9,6 +9,7 @@ function App() {
 
   const [activePage, setActivePage] = useState("upload");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
     <div className="flex h-screen bg-[#f8fafc] overflow-hidden">
@@ -17,13 +18,15 @@ function App() {
       <Sidebar
   activePage={activePage}
   setActivePage={setActivePage}
+  sidebarOpen={sidebarOpen}
 />
 
       {/* Main */}
       <div className="flex flex-col flex-1">
 
         {/* Navbar */}
-        <Navbar activePage={activePage} />
+        <Navbar activePage={activePage} 
+        setSidebarOpen={setSidebarOpen}/>
 
         {/* Page Content */}
         <main className="flex-1 p-3 md:p-6 overflow-y-auto">
