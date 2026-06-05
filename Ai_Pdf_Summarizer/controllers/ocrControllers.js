@@ -1,29 +1,24 @@
 import { extractTextFromImage }
 from "../services/GeminiOCR.js";
 
-export async function handleOCR(
+export const handleOCR = async (
   req,
   res
-) {
+) => {
 
   try {
 
-    if (!req.file) {
+    console.log(req.file);
 
-      return res.status(400).json({
-        message: "No file uploaded",
-      });
-
-    }
-
-    const extractedText =
+    const text =
       await extractTextFromImage(
-        req.file.path
+        req.file.path,
+        req.file.mimetype
       );
 
-    res.status(200).json({
+    res.json({
       success: true,
-      text: extractedText,
+      text
     });
 
   } catch (error) {
@@ -32,9 +27,9 @@ export async function handleOCR(
 
     res.status(500).json({
       success: false,
-      message: "OCR Failed",
+      message: "OCR Failed"
     });
 
   }
 
-}
+};

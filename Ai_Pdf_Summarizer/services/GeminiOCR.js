@@ -6,7 +6,8 @@ const genAI = new GoogleGenerativeAI(
 );
 
 export async function extractTextFromImage(
-  imagePath
+  imagePath,
+  mimeType
 ) {
 
   const model = genAI.getGenerativeModel({
@@ -16,15 +17,14 @@ export async function extractTextFromImage(
   const imageData = fs.readFileSync(imagePath);
 
   const result = await model.generateContent([
+    "Extract all text from this image exactly as written.",
     {
       inlineData: {
-        mimeType: "image/png",
+        mimeType,
         data: imageData.toString("base64"),
       },
     },
-
-
   ]);
 
   return result.response.text();
-}
+} 
