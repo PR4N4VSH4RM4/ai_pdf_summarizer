@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 
 
-import { extractTextFromImage } from "./services/GeminiOCR.js";
+// import { extractTextFromImage } from "./services/GeminiOCR.js";
 import ocrRoutes from "./routes/ocrRoutes.js";
 
 dotenv.config();
