@@ -1,6 +1,6 @@
 import { Upload } from "lucide-react";
 
-function UploadBox({setSelectedFile, setActivePage}) {
+function UploadBox({setSelectedFile, setActivePage, setOcrText}) {
   return (
     <div className="w-full">
 
@@ -31,17 +31,39 @@ function UploadBox({setSelectedFile, setActivePage}) {
 
           <input
             type="file"
-            accept="application/pdf"
+            accept=".png,.jpg,.jpeg"
             className="hidden"
-            onChange={(e) => {
+            onChange={async (e) => {
               const file = e.target.files[0];
+            
+              if (!file) return;
+            
               setSelectedFile(file);
-              if(file){
-                setSelectedFile(file);
-
+            
+              const formData = new FormData();
+              formData.append("file", file);
+            
+              try {
+                const response = await fetch(
+                  "http://localhost:5000/api/ocr",
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                );
+            
+                const data = await response.json();
+            
+                console.log(data);
+            
+                setOcrText(data.text);
+            
                 setTimeout(() => {
                   setActivePage("viewer");
                 }, 100);
+            
+              } catch (error) {
+                console.error(error);
               }
             }}
           />
