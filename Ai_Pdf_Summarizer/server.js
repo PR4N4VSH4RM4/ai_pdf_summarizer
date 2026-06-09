@@ -5,6 +5,7 @@ import cors from "cors";
 
 // import { extractTextFromImage } from "./services/GeminiOCR.js";
 import ocrRoutes from "./routes/ocrRoutes.js";
+import pdfRoutes from "./routes/pdfRoutes.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api", ocrRoutes);
+app.use("/api", pdfRoutes);
 
 
 app.get("/", (req, res) => {
