@@ -23,11 +23,8 @@ export const handlePdf = async (req, res) => {
     } catch (err) {
       console.log("Normal extraction failed");
     }
-
-    if (!text || text.trim().length < 500) {
-      text = await ocrPdf(pdfPath);
-      source = "ocr";
-    }
+    text = await ocrPdf(pdfPath);
+    source = "ocr";
 
     if (fs.existsSync(pdfPath)) {
       fs.unlinkSync(pdfPath);

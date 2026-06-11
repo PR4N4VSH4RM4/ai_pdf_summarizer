@@ -14,18 +14,27 @@ export async function ocrPdf(pdfPath) {
 
   let fullText = "";
 
-  // Test ke liye pehle 3 pages
   for (let i = 1; i <= 3; i++) {
-    const page = await convert(i);
+    try {
+      const page = await convert(i);
 
-    const result = await Tesseract.recognize(
-      page.path,
-      "eng+hin+guj"
-    );
+      console.log("PAGE OBJECT:", page);
 
-    fullText += result.data.text + "\n";
+      const result = await Tesseract.recognize(
+        page.path,
+        "eng+hin+guj"
+      );
 
-    fs.unlinkSync(page.path);
+      console.log("OCR TEXT:", result.data.text);
+
+      fullText += result.data.text + "\n";
+
+
+      // fs.unlinkSync(page.path);
+
+    } catch (err) {
+      console.error("OCR PAGE ERROR:", err);
+    }
   }
 
   return fullText;
