@@ -27,7 +27,11 @@ export async function extractTextFromImage(
 
       const result = await Promise.race([
         model.generateContent([
-          "Extract all text from this image exactly as written.",
+          `You are an OCR engine.
+          Extract all text exactly as written.
+          Do not summarize.
+          Do not translate.
+          Preserve original language, line breaks and formatting.`,,
           {
             inlineData: {
               mimeType,

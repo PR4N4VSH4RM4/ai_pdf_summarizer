@@ -2,6 +2,7 @@ import { fromPath } from "pdf2pic";
 import Tesseract from "tesseract.js";
 import fs from "fs";
 
+
 export async function ocrPdf(pdfPath) {
   const convert = fromPath(pdfPath, {
     density: 200,
