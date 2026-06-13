@@ -31,7 +31,7 @@ function UploadBox({setSelectedFile, setActivePage, setOcrText}) {
 
           <input
             type="file"
-            accept=".png,.jpg,.jpeg"
+            accept=".pdf"
             className="hidden"
             onChange={async (e) => {
               const file = e.target.files[0];
@@ -45,7 +45,7 @@ function UploadBox({setSelectedFile, setActivePage, setOcrText}) {
             
               try {
                 const response = await fetch(
-                  "http://localhost:5000/api/ocr",
+                  "http://localhost:5000/api/pdf",
                   {
                     method: "POST",
                     body: formData,
@@ -53,6 +53,7 @@ function UploadBox({setSelectedFile, setActivePage, setOcrText}) {
                 );
             
                 const data = await response.json();
+                console.log("API Response:", data);
             
                 console.log(data);
             

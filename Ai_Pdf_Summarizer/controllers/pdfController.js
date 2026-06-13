@@ -1,5 +1,3 @@
-// controllers/pdfController.js
-
 import fs from "fs";
 import { extractPdfText } from "../services/extractPdfText.js";
 import { ocrPdf } from "../services/ocrPdf.js";
