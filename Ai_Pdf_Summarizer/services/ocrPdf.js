@@ -1,16 +1,15 @@
-import { fromPath } from "pdf2pic";
-import Tesseract from "tesseract.js";
 import fs from "fs";
-
+import { fromPath } from "pdf2pic";
+import { extractTextFromImage } from "./GeminiOCR.js";
 
 export async function ocrPdf(pdfPath) {
   const convert = fromPath(pdfPath, {
-    density: 200,
+    density: 300,
     saveFilename: "page",
     savePath: "./temp",
     format: "png",
-    width: 1200,
-    height: 1600,
+    width: 2000,
+    height: 3000,
   });
 
   let fullText = "";
@@ -19,22 +18,26 @@ export async function ocrPdf(pdfPath) {
     try {
       const page = await convert(i);
 
-      console.log("PAGE OBJECT:", page);
+      console.log(`OCR Page ${i}`);
+      console.log("Image Path:", page.path);
 
-      const result = await Tesseract.recognize(
+      const text = await extractTextFromImage(
         page.path,
-        "eng+hin+guj"
+        "image/png"
       );
 
-      console.log("OCR TEXT:", result.data.text);
+      fullText += text + "\n\n";
 
-      fullText += result.data.text + "\n";
+      if (fs.existsSync(page.path)) {
+        fs.unlinkSync(page.path);
+      }
 
-
-      // fs.unlinkSync(page.path);
-
-    } catch (err) {
-      console.error("OCR PAGE ERROR:", err);
+    } catch (error) {
+      console.log(
+        `OCR PAGE ${i} ERROR:`,
+        error.message
+      );
+      break;
     }
   }
 

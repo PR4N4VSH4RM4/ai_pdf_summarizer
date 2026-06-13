@@ -31,7 +31,7 @@ export async function extractTextFromImage(
           Extract all text exactly as written.
           Do not summarize.
           Do not translate.
-          Preserve original language, line breaks and formatting.`,,
+          Preserve original language, line breaks and formatting.`,
           {
             inlineData: {
               mimeType,
