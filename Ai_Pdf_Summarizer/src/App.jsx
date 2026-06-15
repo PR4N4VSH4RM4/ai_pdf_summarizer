@@ -11,6 +11,7 @@ function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [ocrText, setOcrText] = useState("");
+  const [summary, setSummary] = useState("");
 
 
 
@@ -45,8 +46,11 @@ function App() {
     </h2>
 
     <pre className="whitespace-pre-wrap">
-      {ocrText}
+      {ocrText.slice(0,2000)}
     </pre>
+    <button>
+      Show More
+    </button>
   </div>
 )}
 
